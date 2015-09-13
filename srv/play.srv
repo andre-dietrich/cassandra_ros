@@ -1,0 +1,11 @@
+int8 play
+string[] topics
+uint32 start_time
+uint32 stop_time
+string filter
+uint32 queuesize
+uint32 delay
+float32 speed
+bool loop
+---
+string info

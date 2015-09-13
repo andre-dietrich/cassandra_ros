@@ -1,0 +1,7 @@
+<launch>
+	<include file="$(find cassandra_ros)/launch/cassandraBag.launch" />
+	
+	<node pkg="image_view" type="image_view" name="image_view" args="image:=/usb_cam/image_raw _image_transport:=compressed"/>
+	
+	<node pkg="cassandra_ros" type="cassandraBag-cli.py" name="cassandraBag_cli" args="play start /usb_cam/image_raw/compressed"/>
+</launch>

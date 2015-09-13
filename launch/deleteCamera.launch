@@ -1,0 +1,5 @@
+<launch>
+	<include file="$(find cassandra_ros)/launch/cassandraBag.launch" />
+	
+	<node pkg="cassandra_ros" type="cassandraBag-cli.py" name="cassandraBag_cli" args="delete /usb_cam/image_raw/compressed"/>
+</launch>

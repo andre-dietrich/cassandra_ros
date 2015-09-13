@@ -1,0 +1,7 @@
+<launch>
+	<node pkg="cassandra_ros" type="cassandraBag.py" name="cassandraBag" output="screen">
+		<param name="~host"		type="str" value="localhost" />
+		<param name="~port"		type="int" value="9160" />
+		<param name="~keyspace"	type="str" value="ROS" />
+	</node>	
+</launch>

@@ -1,0 +1,10 @@
+int8 record
+string[] topics
+string cassandra_format
+string filter
+uint32 start_time
+uint32 stop_time
+uint32 ttl
+string apply
+---
+string info
