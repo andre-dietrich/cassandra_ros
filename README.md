@@ -2,9 +2,9 @@
 
 Library and tools for dynamically storing ROS messages in Apache Cassandra.
 
-Author: André Dietrich, Sebastian Zug
-License: BSD
-Source: git clone https://gitlab.com/OvGU-ESS/cassandra_ros.git
+	Author: André Dietrich, Sebastian Zug
+	License: BSD
+	Source: git clone https://gitlab.com/OvGU-ESS/cassandra_ros.git
 
 ## Overview
 
