@@ -19,6 +19,16 @@ MongoDB. But in contrast to MongoDB you are able to choose the format you would
 like to store your messages. You can choose between various formats and thus,
 explore your data afterwards by using Cassandra's CQL capabilities.
 
+## Media
+
+[![YouTube](http://img.youtube.com/vi/lQczBtVmomc/0.jpg)](http://www.youtube.com/watch?v=lQczBtVmomc "click to watch")
+
+[![YouTube](http://img.youtube.com/vi/tfczj1jb3B4/0.jpg)](http://www.youtube.com/watch?v=tfczj1jb3B4 "click to watch")
+
+[![YouTube](http://img.youtube.com/vi/czLQ-yxBYC4/0.jpg)](http://www.youtube.com/watch?v=czLQ-yxBYC4 "click to watch")
+
+[![YouTube](http://img.youtube.com/vi/y6LqLNB4VDk/0.jpg)](http://www.youtube.com/watch?v=y6LqLNB4VDk "click to watch")
+
 ## Installation
 
 First of all you need to download and install CassandraDB manually form apache:
