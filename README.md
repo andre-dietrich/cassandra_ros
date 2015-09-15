@@ -50,7 +50,7 @@ available.
 First of all you will need start Cassandra, what is done in most cases by going
 into the folder, where Cassandra was installed and than by typing in:
 
-```bash
+``` bash
 $ bin/cassandra -f
 ```
 The option -f hinders Cassandra to start a deamon in backgroud, for more
@@ -60,7 +60,7 @@ We added three simple launch-files, with which you can test, if your
 installation was successful. You will need a webcam to run these examples,
 camera-settings can be changed in the launch-file. First of all run
 
-```bash
+``` bash
 $ roslaunch cassandra_ros recordCamera.launch
 ```
 a window with the camera-stream should appear, furthermore this starts
@@ -68,25 +68,25 @@ cassandraBag.py, a service which stores this stream in a CassandraDB. If you
 abort, recording will stop automatically. If this does not work, or you see the
 message:
 
-```
+``` plain
 Not starting RPC server as requested. Use JMX (StorageService->startRPCServer())
 or nodetool (enablethrift) to start it ...
 ```
 then simply run:
 
-```bash
+``` bash
 $ sudo nodetool (enablethrift)
 ```
 
 By running:
 
-```bash
+``` bash
 $ roslaunch cassandra_ros replayCamera.launch
 ```
 the previous recorded stream will be replayed. If you could see yourself,
 everything seems to be correct installed and configured. By running:
 
-```bash
+``` bash
 $ roslaunch cassandra_ros deleteCamera.launch
 ```
 the column-family, in which the stream was stored, gets deleted. The service
@@ -119,22 +119,20 @@ http://wiki.apache.org/cassandra/Administration%20Tools
 
 ## Philosophy
 
-These are some design-principles we made for data handling, which might a bit
-confusing, if you examine your data with other tools or one of the recommended
-GUIs.
-
-Each topic is stored within its own column-family, one message per row.
-
-Due to the maximum column-family-name-length of 42 Bytes, we use the hash-value
-of the topic-name as the column-family-name. But you do not need to bother with
-hash-values, using our interface you can still work with topic-names, everything
-is hidden.
-
-All meta information about a topic, including type, storage-format, key-format,
-etc. are stored within the comment-field of every column-family. No other
-column-family is required or has to be updated to store meta-information, what
-reduces the amount of additional effort, but forbids to change the comment-field
-manually. Everything is handled within the background.
+1. These are some design-principles we made for data handling, which might a bit
+   confusing, if you examine your data with other tools or one of the
+   recommended GUIs.
+2. Each topic is stored within its own column-family, one message per row.
+3. Due to the maximum column-family-name-length of 42 Bytes, we use the
+   hash-value of the topic-name as the column-family-name. But you do not need
+   to bother with hash-values, using our interface you can still work with
+   topic-names, everything is hidden.
+4. All meta information about a topic, including type, storage-format,
+   key-format, etc. are stored within the comment-field of every column-family.
+   No other column-family is required or has to be updated to store
+   meta-information, what reduces the amount of additional effort, but forbids
+   to change the comment-field manually. Everything is handled within the
+   background.
 
 ## Basic Interface
 
@@ -145,7 +143,7 @@ required to handle the access to every topic/colum-family.
 
 ## Let us start by connecting to Cassandra:
 
-```python
+``` python
 import rospy
 import roslib; roslib.load_manifest("cassandra_ros")
 import RosCassandra.RosCassandra as rc
@@ -170,7 +168,7 @@ rosCas.connectToKeyspace('test')
 Thats it, now we are connected. In the next step we will create a new
 topic/column-family:
 
-```python
+``` python
 # this is the datatype we will store
 from std_msgs.msg import String
 topic = 'test_topic'
@@ -197,7 +195,7 @@ rosCas.getAllTopics()
 ```
 In the next step we will start to insert some messages into the database
 
-```python
+``` python
 # get the topic-containerros
 topicContainer = rosCas.getTopic(topic)
 
@@ -258,7 +256,7 @@ storing. But currently it is also possible to store messages as "strings",
 "yaml", or "ros" format. The type of conversion is defined at the creation of a
 topic-container:
 
-```python
+``` python
 rosCas.addTopic(topic,
                 format, # exactly in here ... 'string', 'yaml', 'ros', 'binary'
                 'String',
@@ -273,7 +271,7 @@ therefore translated into a linar form and column are strongly typed, according
 to the defined message formats. A Message of type
 "geometry_msgs/TransformStamped":
 
-```plain
+``` plain
 std_msgs/Header header
    uint32 seq
    time stamp
@@ -292,7 +290,7 @@ geometry_msgs/Transform transform
 ```
 is then transformed into Cassandra format:
 
-```plain
+``` plain
 .header.seq : INT_TYPE
 .header.stamp : DATE_TYPE
 .header.frame_id : UTF8_TYPE
@@ -311,7 +309,7 @@ How does it work? If you take a look into cassandra_ros/lib ... you will see a
 couple of files in the form of CassandraTopic_'format'.py, which are all
 descendants of CassandraTopic_.py. And each of them overwrites the methods:
 
-```getColumnValidationClasses```: as the name suggests, is used to define the
+`getColumnValidationClasses`: as the name suggests, is used to define the
 column validation classes of the column-family * encode is used to encode the
 ROS message into a Cassandra storable format * and decode translates it back,
 from Cassandra to ROS.
@@ -331,14 +329,14 @@ will have to generate at first secondary indexes. Because this might be
 expensive and not required for every part of a message, this has to be done
 manually, as follows:
 
-```python
+``` python
 # this will automatically generate the appropriate index
 rosCas.createIndex(topic, '.data')
 ```
 For an automatic translation of topics, use the following method, this will
 replace topicnames with their hash-value.
 
-```python
+``` python
 # will return everything
 rosCas.exequteCQL('SELECT * FROM "test_topic"')
 
@@ -369,40 +367,40 @@ If you already checked, if your package is working, than you already had used
 cassandraBag. This is a simple service, which stores and replays messages
 similar to rosbag. Simply start the application with:
 
-```bash
+``` bash
 $ roslaunch cassandra_ros cassandraBag.launch
 ```
 You can also change some of the parameters in the launch-file. Storing and
 replaying or deleting topics requires to use the following command-line tool:
 
-```bash
+``` bash
 $ rosrun cassandra_ros cassandraBag-cli.py
 ```
 To get a list of all currently stored topics, use the parameter 'list':
 
-```bash
+``` bash
 $ rosrun  cassandra_ros cassandraBag-cli.py list
 ```
 Use record to store online messages, while option -f denotes the storage-format
 rosrun cassandra_ros cassandraBag-cli.py record -f string start topic and use
 record stop to finish recoring
 
-```bash
+``` bash
 $ rosrun cassandra_ros cassandraBag-cli.py record stop topic
 ```
 You can bag as many topics as Cassandra supports in parallel and stop and run
 recording dynamically
 
-```bash
+``` bash
 $ rosrun cassandra_ros cassandraBag-cli.py play start /usb_cam/image_raw/compressed
 ```
 and if you want to delete some topics use delete, for more help, just run
 
-```bash
+``` bash
 $ rosrun cassandra_ros cassandraBag-cli.py -h
 ```
 or something like, which will support you with some command-line options ...
 
-```bash
+``` bash
 $ rosrun cassandra_ros cassandraBag-cli.py play
 ```
