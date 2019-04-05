@@ -2,14 +2,12 @@
 
 Library and tools for dynamically storing ROS messages in Apache Cassandra.
 
-| | |
-| ----------- | ---------------------------------------------------------------------------------------- |
-| Authors     | André Dietrich & Sebastian Zug                                                           |
-| Source      | `git clone` https://gitlab.com/OvGU-ESS/cassandra_ros.git                                |
-| Email       | <mailto:dietrich@ivs.cs.uni-magdeburg.de> & <mailto:zug@ivs.cs.uni-magdeburg.de>         |
-| Publication | ROS Meets Cassandra: Data Management in Smart Environments with NoSQL                    |
+| Author      | André Dietrich                                                         |
+| Source      | `git clone` https://gitlab.com/andre-dietrich/cassandra_ros.git        |
+| Email       | <mailto:andre.dietrich@ovgu.de>                                        |
+| Publication | ROS Meets Cassandra: Data Management in Smart Environments with NoSQL  |
 || http://eos.cs.ovgu.de/wp-content/uploads/2014/09/ROS-Meets-Cassandra-Data-Management-in-Smart-Environments-with-NoSQL.pdf |
-| Slides      | http://eos.cs.ovgu.de/wp-content/uploads/2015/06/sozi-presentation.svg                   |
+| Slides      | http://eos.cs.ovgu.de/wp-content/uploads/2015/06/sozi-presentation.svg |
 
 ## Overview
 
