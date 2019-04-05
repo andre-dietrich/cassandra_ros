@@ -2,9 +2,8 @@
 
 Library and tools for dynamically storing ROS messages in Apache Cassandra.
 
-|||
-|--|--|
 | Author      | André Dietrich                                                         |
+|-------------|------------------------------------------------------------------------|
 | Source      | `git clone` https://gitlab.com/andre-dietrich/cassandra_ros.git        |
 | Email       | <mailto:andre.dietrich@ovgu.de>                                        |
 | Publication | ROS Meets Cassandra: Data Management in Smart Environments with NoSQL  |
